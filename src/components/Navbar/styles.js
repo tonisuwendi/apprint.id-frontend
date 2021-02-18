@@ -11,6 +11,9 @@ export const NavbarWrapper = css`
   position: fixed;
   width: 500px;
   z-index: 9;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const dFlex = (direction, jc) => css`

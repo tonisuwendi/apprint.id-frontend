@@ -22,7 +22,7 @@ const Footer = () => {
     <>
     <footer className={cx(bgColor("#222"), padding("30px 20px"))}>
       <img className={cx(sizeElm("150px", "auto"))} src="https://m.printerous.com/assets/web/logo-printerous-white@2x-6b488e320d4858cc0171d2f9b3648d608b907bbb88ec570b86bd92fd5d8deee3.png" alt="logo" />
-      <p className={cx(textColor("white"), margin("10px 0 0 0"), fontElm("Nunito", "12px", "400"))}>{String.dummyShortDesc}</p>
+      <p className={cx(textColor("#aaa"), margin("10px 0 0 0"), fontElm("Nunito", "12px", "400"))}>{String.dummyShortDesc}</p>
       <div className={cx(margin("20px 0 0 0"))}>
         <h3 className={cx(textColor("white"), fontElm("Nunito", "18px", "800"), margin("0"))}>{String.dummyTitleContact}</h3>
         <ListComponent icon={<PhoneFilled />} text={String.dummyPhone} />
