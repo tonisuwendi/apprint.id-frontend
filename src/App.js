@@ -1,10 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomePage from './Routes/HomePage/HomePage';
+import ProductsPage from './Routes/ProductsPage/ProductsPage';
+import CategoryPage from './Routes/CategoryPage/CategoryPage';
+import DetailProduct from './Routes/DetailProduct/DetailProduct';
 
 function App() {
   return (
-    <HomePage />
+    <Router>
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/products" exact component={ProductsPage} />
+        <Route path="/category/:slug" exact component={CategoryPage} />
+        <Route path="/product/:slug" exact component={DetailProduct} />
+      </Switch>
+    </Router>
   );
 }
 

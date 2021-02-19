@@ -13,12 +13,6 @@ export const desktopView = css`
   }
 `;
 
-export const dFlex = (direction, jc) => css`
-  display: flex;
-  flex-direction: ${direction};
-  justify-content: ${jc};
-`;
-
 export const dGrid = css`
   display: grid;
   gap: 15px;
@@ -53,10 +47,4 @@ export const sizeElmMobile = (width, height) => css`
     transform: translate(-50%, 0);
     width: ${width};
   }
-`;
-
-export const centerElm = css`
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
 `;

@@ -13,18 +13,6 @@ export const desktopView = css`
   }
 `;
 
-export const dFlex = (direction, jc) => css`
-  display: flex;
-  flex-direction: ${direction};
-  justify-content: ${jc};
-`;
-
-export const dGrid = css`
-  display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(2, 1fr);
-`;
-
 export const margin = (value) => css`
   margin: ${value}
 `;
@@ -45,6 +33,12 @@ export const fontSizeMobile = (value) => css`
   }
 `;
 
+export const dGrid = css`
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(2, 1fr);
+`;
+
 export const sizeElmMobile = (width, height) => css`
   @media (max-width: 500px){
     height: ${height};
@@ -53,10 +47,4 @@ export const sizeElmMobile = (width, height) => css`
     transform: translate(-50%, 0);
     width: ${width};
   }
-`;
-
-export const centerElm = css`
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
 `;

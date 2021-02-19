@@ -1,9 +1,12 @@
+const yearNow = new Date().getFullYear();
+
 const String = {
   "searchTitle": "Mau print apa?",
   "searchPlaceholder": "Mau print apa hari ini?",
   "btnSearch": "Cari Sekarang",
   "categoryTitleHome": "Kategori Produk Kami",
   "productTitleHome": "Produk Cetak Pilihan",
+  "productAll": "Semua Produk",
   "dummyCategoryName": "Peralatan Kantor",
   "dummyProductTitle": "Paper Bag Makanan",
   "dummyProductPrice": "Mulai dari Rp.1500",
@@ -17,7 +20,8 @@ const String = {
   "accountInstagram": "tonisuwen",
   "accountFacebook": "tonisuwen",
   "accountLinkedIn": "tonisuwendi",
-  "copyRight": `© Copyright 2021 PT Appint.id`
+  "copyRight": `© Copyright ${yearNow} PT Apprint.id`,
+  "heightImgSingleBanner": "150px",
 }
 
 export default String;

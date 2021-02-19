@@ -57,3 +57,7 @@ export const fontSizeMobile = (value) => css`
     font-size: ${value};
   }
 `;
+
+export const color = (value) => css`
+  color: ${value};
+`;
