@@ -3,6 +3,7 @@ import HomePage from './Routes/HomePage/HomePage';
 import ProductsPage from './Routes/ProductsPage/ProductsPage';
 import CategoryPage from './Routes/CategoryPage/CategoryPage';
 import DetailProduct from './Routes/DetailProduct/DetailProduct';
+import Demo from './Routes/Demo';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/products" exact component={ProductsPage} />
         <Route path="/category/:slug" exact component={CategoryPage} />
         <Route path="/product/:slug" exact component={DetailProduct} />
+        <Route path="/demo" exact component={Demo} />
       </Switch>
     </Router>
   );

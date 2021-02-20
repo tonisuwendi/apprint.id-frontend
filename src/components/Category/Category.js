@@ -2,6 +2,8 @@ import React from 'react';
 import { cx } from '@emotion/css';
 import { Link } from 'react-router-dom';
 import String from '../../config/String';
+import CategoryLoad from './CategoryLoad';
+import Config from '../../service/Config';
 
 import {
   card,
@@ -15,15 +17,24 @@ import {
   color
 } from './styles';
 
-const Category = () => {
+const Category = (props) => {
   return (
     <>
-      <Link className={cx(card, rounded("5px"))} to="/category/kartu">
+    {
+      props.load ?
+      <Link className={cx(card, rounded("5px"))} to={`/category/${props.data.slug}`}>
         <div className={cx(dFlex("row", "center"))}>
-          <img className={cx(sizeElm("40px", "40px"), sizeElmMobile("35px", "35px"), rounded("5px"))} src="https://prts-gutenberg.s3.amazonaws.com/prts-website/production/uploads/navigation_item/thumbnail/1059/small_webp_THUMBNAIL_COM_Face_Shield_500x500.webp" alt="icon category" />
-          <p className={cx(margin("0 0 0 10px"), color("#333"), fontSizeMobile("12px"), fontElm("Nunito", "15px", "600"))}>{String.dummyCategoryName}</p>
+          <img className={cx(sizeElm("40px", "40px"), sizeElmMobile("35px", "35px"), rounded("5px"))} src={`${Config.backendURL}public/img/categories/${props.data.icon}`} alt="icon category" />
+          <p className={cx(margin("0 0 0 10px"), color("#333"), fontSizeMobile("12px"), fontElm("Nunito", "15px", "600"))}>{props.data.name}</p>
         </div>
       </Link>
+      :
+      <div className={cx(card, rounded("5px"))}>
+        <div className={cx(dFlex("row", "center"))}>
+          <CategoryLoad />
+        </div>
+      </div>
+    }
     </>
   )
 }
