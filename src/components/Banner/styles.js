@@ -1,12 +1,12 @@
 import { css } from '@emotion/css';
 
-export const sizeElm = (width, height) => css`
-  @media (min-width: 500px) {
-    height: ${height};
-    width: ${width};
+export const sizeElm = (width, height, mHeight = null) => css`
+  @media (min-width: 501px) {
+    height: ${height} !important;
+    width: ${width} !important;
   }
   @media (max-width: 500px) {
-    height: auto;
-    width: 100vw;
+    height: ${mHeight} !important;
+    width: 100vw !important;
   }
 `;

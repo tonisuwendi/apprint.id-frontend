@@ -49,3 +49,9 @@ export const fontSizeMobile = (value) => css`
     font-size: ${value};
   }
 `;
+
+export const blockSkeleton = (width, height) => css`
+  background-color: #F2F2F2;
+  height: ${height};
+  width: ${width};
+`;

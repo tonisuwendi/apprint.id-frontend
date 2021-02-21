@@ -1,8 +1,6 @@
 import React from 'react';
 import { cx } from '@emotion/css';
 
-import String from '../../config/String';
-
 import {
   imgSize,
   filter,

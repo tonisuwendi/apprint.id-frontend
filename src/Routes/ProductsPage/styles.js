@@ -48,3 +48,9 @@ export const sizeElmMobile = (width, height) => css`
     width: ${width};
   }
 `;
+
+export const centerElm = css`
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+`;

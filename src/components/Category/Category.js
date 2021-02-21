@@ -1,7 +1,6 @@
 import React from 'react';
 import { cx } from '@emotion/css';
 import { Link } from 'react-router-dom';
-import String from '../../config/String';
 import CategoryLoad from './CategoryLoad';
 import Config from '../../service/Config';
 

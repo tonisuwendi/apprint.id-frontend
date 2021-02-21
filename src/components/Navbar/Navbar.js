@@ -1,14 +1,16 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { cx } from '@emotion/css';
 
-import { Modal, Input, Button } from 'antd';
+import { Modal, Input, Button, Skeleton } from 'antd';
 
 import {
   SearchOutlined,
 } from '@ant-design/icons';
 
 import String from '../../config/String';
+import Config from '../../service/Config';
+import API from '../../service/index';
 
 import {
   dFlex,
@@ -20,6 +22,14 @@ import {
 
 const Navbar = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [logoDark, setLogoDark] = useState();
+
+  useEffect(() => {
+    API.getSetting()
+    .then((result) => {
+      setLogoDark(result.data.setting.logo_dark);
+    })
+  })
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -34,17 +44,29 @@ const Navbar = () => {
     <Fragment>
       <nav className={cx(NavbarWrapper, dFlex("row", "space-between"))}>
         <div className={cx(dFlex("column", "center"))}>
-          <Link to="/">
-            <img className={cx(sizeElm("auto", "21px"))} src="https://m.printerous.com/assets/web/logo-printerous-40739e61608ee3d80aa3f4b39554a9b21d31a50f3e37502f8420f83f5c9383eb.png" alt="logo" />
-          </Link>
+          {
+            logoDark ?
+            <Link to="/">
+              <img className={cx(sizeElm("auto", "21px"))} src={`${Config.backendURL}public/img/logo/${logoDark}`} alt="logo" />
+            </Link>
+            :
+            <Skeleton.Input active size="small" style={{ width: 120 }} />
+          }
         </div>
-        <div className={cx(dFlex("column", "center"))}>
-          <SearchOutlined onClick={showModal} className={cx(fontSize("25px"), cursor("pointer"))} />
-        </div>
+        {
+          logoDark ?
+          <div className={cx(dFlex("column", "center"))}>
+            <SearchOutlined onClick={showModal} className={cx(fontSize("25px"), cursor("pointer"))} />
+          </div>
+          :
+          <div className={cx(dFlex("column", "center"))}>
+            <Skeleton.Avatar active size="default" />
+          </div>
+        }
       </nav>
       <div style={{height: "60px"}}></div>
       <Modal title={String.searchTitle} style={{ top: 10 }} onCancel={handleCancel} visible={isModalVisible} footer={[
-        <Button type="primary">{String.btnSearch}</Button>
+        <Button type="primary" key="1">{String.btnSearch}</Button>
       ]}>
         <Input size="large" placeholder={String.searchPlaceholder} prefix={<SearchOutlined />} />
       </Modal>
