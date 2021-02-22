@@ -6,6 +6,7 @@ const String = {
   "productTitleHome": "Produk Kami",
   "productAll": "Semua Produk",
   "buttonShowAllProduct": "Lihat Semua Produk",
+  "resultSearch": "Hasil pencarian ",
   "titleContact": "Hubungi Kami",
   "accountInstagram": "tonisuwen",
   "accountFacebook": "tonisuwen",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { cx } from '@emotion/css';
 import { Skeleton, Alert } from 'antd';
 import Navbar from '../../components/Navbar/Navbar';
@@ -18,16 +19,22 @@ import {
   dGrid,
   sizeElmMobile,
   centerElm
-} from './styles';
+} from '../ProductsPage/styles';
 
-const ProductsPage = () => {
+const SearchPage = () => {
 
   const [products, setProducts] = useState([]);
   const [imgProductLoad, setImgProductLoad] = useState(false);
 
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  }
+
+  const querySlug = useQuery();
+
   useEffect(() => {
-    document.title = 'Semua Produk';
-    API.getProducts()
+    document.title = `Pencarian: ${querySlug.get("q")}`;
+    API.searchProduct(querySlug.get("q"))
     .then((result) => {
       if(result.data.products.length > 0){
         setProducts(result.data.products);
@@ -43,10 +50,10 @@ const ProductsPage = () => {
     setImgProductLoad(value);
   }
 
-  return (
+  return(
     <>
     <div className={cx(desktopView)}>
-      <Navbar />
+      <Navbar keyword={querySlug.get("q")} />
       {
         imgProductLoad ?
         null :
@@ -63,7 +70,7 @@ const ProductsPage = () => {
       {
         products ?
         <div style={imgProductLoad ? {} : {display: 'none'}}>
-          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitleHome}</h2>
+          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "18px", "500"))}>{`${String.resultSearch} ${querySlug.get('q')}`}</h2>
           <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
             {
               products.map((product, i) => {
@@ -74,7 +81,7 @@ const ProductsPage = () => {
         </div> :
         <div className={cx(margin("20px 0 0 0"))}>
           <Alert banner message={
-              <div>Belum ada produk untuk saat ini</div>
+              <div>Tidak ada hasil untuk {querySlug.get('q')}</div>
           } />
         </div>
       }
@@ -87,4 +94,4 @@ const ProductsPage = () => {
   )
 }
 
-export default ProductsPage;
+export default SearchPage;

@@ -20,9 +20,10 @@ import {
   cursor
 } from './styles';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [logoDark, setLogoDark] = useState();
+  const [keyword, setKeyword] = useState(props.keyword);
 
   useEffect(() => {
     API.getSetting()
@@ -38,6 +39,21 @@ const Navbar = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  const handleChangeKeyword = (event) => {
+    setKeyword(event.target.value);
+  }
+
+  const handleSearch = (event) => {
+    const linkRedirect = `/search?q=${keyword}`;
+    if(event.type === "keydown"){
+      if(event.key === 'Enter'){
+        window.location.href = linkRedirect;
+      }
+    }else if(event.type === "click"){
+      window.location.href = linkRedirect;
+    }
+  }
 
   return(
     <>
@@ -66,9 +82,9 @@ const Navbar = () => {
       </nav>
       <div style={{height: "60px"}}></div>
       <Modal title={String.searchTitle} style={{ top: 10 }} onCancel={handleCancel} visible={isModalVisible} footer={[
-        <Button type="primary" key="1">{String.btnSearch}</Button>
+        <Button type="primary" key="1" onClick={handleSearch}>{String.btnSearch}</Button>
       ]}>
-        <Input size="large" placeholder={String.searchPlaceholder} prefix={<SearchOutlined />} />
+        <Input value={keyword} onKeyDown={handleSearch} onChange={handleChangeKeyword} size="large" placeholder={String.searchPlaceholder} prefix={<SearchOutlined />} />
       </Modal>
     </Fragment>
     </>
