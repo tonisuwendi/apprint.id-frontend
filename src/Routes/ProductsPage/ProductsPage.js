@@ -26,6 +26,7 @@ const ProductsPage = () => {
   const [imgProductLoad, setImgProductLoad] = useState(false);
 
   useEffect(() => {
+    document.title = 'Semua Produk';
     API.getProducts()
     .then((result) => {
       if(result.data.products.length > 0){

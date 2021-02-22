@@ -8,6 +8,7 @@ import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
 import SingleBanner from '../../components/SingleBanner/SingleBanner';
 import String from '../../config/String';
+import Config from '../../service/Config';
 import API from '../../service';
 
 import {
@@ -29,6 +30,7 @@ const CategoryPage = () => {
     API.getProductsByCategory(urlSlug.slug)
     .then((result) => {
       setCategory(result.data.category);
+      document.title = `Kategori ${result.data.category.name}`;
       if(result.data.products.length > 0){
         setProducts(result.data.products);
       }else{
@@ -37,7 +39,7 @@ const CategoryPage = () => {
       }
     })
     window.scrollTo(0,0);
-  }, [])
+  }, [urlSlug])
 
   const handleImgProductLoad = (value) => {
     setImgProductLoad(value);
@@ -47,7 +49,7 @@ const CategoryPage = () => {
     <>
     <div className={cx(desktopView)}>
       <Navbar />
-      <SingleBanner title={category.name} filterImg heightSingleBanner={String.heightImgSingleBanner} srcImg="https://prts-gutenberg.s3.amazonaws.com/prts-website/production/uploads/navigation_item/thumbnail/89/webp_card.webp" />
+      <SingleBanner title={category.name} filterImg heightSingleBanner={String.heightImgSingleBanner} srcImg={category.icon ? `${Config.backendURL}public/img/categories/${category.icon}` : '#'} />
       {
         imgProductLoad ?
         null :

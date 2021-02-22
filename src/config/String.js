@@ -3,7 +3,7 @@ const String = {
   "searchPlaceholder": "Mau print apa hari ini?",
   "btnSearch": "Cari Sekarang",
   "categoryTitleHome": "Kategori Produk Kami",
-  "productTitleHome": "Produk Cetak Pilihan",
+  "productTitleHome": "Produk Kami",
   "productAll": "Semua Produk",
   "buttonShowAllProduct": "Lihat Semua Produk",
   "titleContact": "Hubungi Kami",
@@ -13,6 +13,9 @@ const String = {
   "dummyProductTitle": "Paper Bag Makanan",
   "dummyProductPrice": "Mulai dari Rp.1500",
   "heightImgSingleBanner": "150px",
+  "textQtyOrder": "Jumlah Order",
+  "placeholderSelect": "Pilih Salah Satu",
+  "buttonOrder": "Pesan Sekarang"
 }
 
 export default String;

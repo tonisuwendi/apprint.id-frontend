@@ -3,8 +3,19 @@ import HomePage from './Routes/HomePage/HomePage';
 import ProductsPage from './Routes/ProductsPage/ProductsPage';
 import CategoryPage from './Routes/CategoryPage/CategoryPage';
 import DetailProduct from './Routes/DetailProduct/DetailProduct';
+import { useEffect } from 'react';
+import API from './service';
+import Config from './service/Config';
 
 function App() {
+  useEffect(() => {
+    API.getSetting()
+    .then((result) => {
+      document.getElementById("indexFaviconGlobalDefault").href = `${Config.backendURL}public/img/logo/${result.data.setting.favicon}`;
+      document.getElementById("indexFaviconGlobalAppleTouch").href = `${Config.backendURL}public/img/logo/${result.data.setting.favicon}`;
+    })
+  }, [])
+
   return (
     <Router>
       <Switch>

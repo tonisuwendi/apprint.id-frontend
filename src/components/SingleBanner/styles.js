@@ -6,6 +6,10 @@ export const singleBanner = (height) => css`
   width: 100%;
 `;
 
+export const bgColor = (value) => css`
+  background-color: ${value};
+`;
+
 export const position = (value) => css`
   position: ${value};
 `;

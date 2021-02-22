@@ -31,6 +31,10 @@ const HomePage = () => {
   const [imgProductLoad, setImgProductLoad] = useState(false);
   
   useEffect(() => {
+    API.getSetting()
+    .then((result) => {
+      document.title = result.data.setting.app_name;
+    })
     API.getCategories()
     .then((result) => {
       setCategories(result.data.categories);
