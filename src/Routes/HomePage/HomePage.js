@@ -9,6 +9,7 @@ import Banner from '../../components/Banner/Banner';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
+import Tabbar from '../../components/Tabbar/Tabbar';
 import Category from '../../components/Category/Category';
 import String from '../../config/String';
 import API from '../../service';
@@ -59,7 +60,7 @@ const HomePage = () => {
     <div className={cx(desktopView)}>
       <Navbar />
       <Banner />
-      {
+      {/* {
         categories.length > 0 ?
         <Fragment>
           <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.categoryTitleHome}</h2>
@@ -81,12 +82,12 @@ const HomePage = () => {
             <Category />
           </section>
         </div>
-      }
+      } */}
       {
         imgProductLoad ?
         null :
         <Fragment>
-          <div className={cx(margin("40px 0 0 0"))}>
+          <div className={cx(margin("30px 0 0 0"))}>
             <Skeleton.Input active size="small" style={{ width: 150 }} className={cx(centerElm)} />
             <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
             <CardProduct />
@@ -102,7 +103,7 @@ const HomePage = () => {
         products ?
         <Fragment>
           <div style={imgProductLoad ? {} : {display: 'none'}}>
-            <h2 className={cx(margin("40px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitleHome}</h2>
+            <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitleHome}</h2>
             <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
               {
                 products.map((product, i) => {
@@ -126,6 +127,7 @@ const HomePage = () => {
         <DescStore />
       </div>
       <Footer />
+      <Tabbar homePage />
     </div>
     </>
   )

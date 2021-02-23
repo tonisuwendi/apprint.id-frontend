@@ -8,6 +8,7 @@ import SingleBanner from '../../components/SingleBanner/SingleBanner';
 import SelectOption from '../../components/SelectOption/SelectOption';
 import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
+import Tabbar from '../../components/Tabbar/Tabbar';
 import API from '../../service';
 import Config from '../../service/Config';
 import String from '../../config/String';
@@ -59,7 +60,8 @@ const DetailProduct = () => {
       .then((result) => {
         const setting = result.data.setting;
         const msg = generateTextWa(setting.order_wa);
-        window.location.href = `https://wa.me/${setting.whatsapp}?text=${msg}`;
+        window.open(`https://wa.me/${setting.whatsapp}?text=${msg}`);
+        window.location.href = "/";
       })
     }else{
       setAlertDanger(true);
@@ -171,6 +173,7 @@ const DetailProduct = () => {
           <DescStore />
         </div>
         <Footer />
+        <Tabbar />
       </div>
     </>
   )

@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
+import Tabbar from '../../components/Tabbar/Tabbar';
 
 import API from '../../service';
 import String from '../../config/String';
@@ -82,6 +83,7 @@ const ProductsPage = () => {
         <DescStore />
       </div>
       <Footer />
+      <Tabbar />
     </div>
     </>
   )

@@ -45,13 +45,15 @@ const Navbar = (props) => {
   }
 
   const handleSearch = (event) => {
-    const linkRedirect = `/search?q=${keyword}`;
-    if(event.type === "keydown"){
-      if(event.key === 'Enter'){
+    if(keyword !== undefined){
+      const linkRedirect = `/search?q=${keyword}`;
+      if(event.type === "keydown"){
+        if(event.key === 'Enter'){
+          window.location.href = linkRedirect;
+        }
+      }else if(event.type === "click"){
         window.location.href = linkRedirect;
       }
-    }else if(event.type === "click"){
-      window.location.href = linkRedirect;
     }
   }
 

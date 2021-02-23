@@ -16,7 +16,11 @@ const String = {
   "heightImgSingleBanner": "150px",
   "textQtyOrder": "Jumlah Order",
   "placeholderSelect": "Pilih Salah Satu",
-  "buttonOrder": "Pesan Sekarang"
+  "buttonOrder": "Pesan Sekarang",
+  "textTabbarHome": "Beranda",
+  "textTabbarOurProduct": "Produk Kami",
+  "textTabbarChat": "Kontak Kami",
+  "textModalCategories": "Kategori Kami"
 }
 
 export default String;

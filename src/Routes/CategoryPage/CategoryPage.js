@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
+import Tabbar from '../../components/Tabbar/Tabbar';
 import SingleBanner from '../../components/SingleBanner/SingleBanner';
 import String from '../../config/String';
 import Config from '../../service/Config';
@@ -83,6 +84,7 @@ const CategoryPage = () => {
         <DescStore />
       </div>
       <Footer />
+      <Tabbar />
     </div>
     </>
   )

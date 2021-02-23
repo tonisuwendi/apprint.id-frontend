@@ -20,6 +20,15 @@ export const card = css`
   }
 `;
 
+export const cardModal = css`
+  background-color: white;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 0;
+  width: 100%;
+`;
+
 export const dFlex = (direction) => css`
   align-items: center;
   display: flex;
