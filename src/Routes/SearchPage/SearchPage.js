@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { cx } from '@emotion/css';
 import { Skeleton, Alert } from 'antd';
+import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
@@ -26,6 +27,7 @@ const SearchPage = () => {
 
   const [products, setProducts] = useState([]);
   const [imgProductLoad, setImgProductLoad] = useState(false);
+  const [setting, setSetting] = useState();
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -34,7 +36,6 @@ const SearchPage = () => {
   const querySlug = useQuery();
 
   useEffect(() => {
-    document.title = `Pencarian: ${querySlug.get("q")}`;
     API.searchProduct(querySlug.get("q"))
     .then((result) => {
       if(result.data.products.length > 0){
@@ -43,6 +44,10 @@ const SearchPage = () => {
         setProducts(false);
         handleImgProductLoad(true);
       }
+    })
+    API.getSetting()
+    .then((result) => {
+      setSetting(result.data.setting);
     })
     window.scrollTo(0,0);
   }, [])
@@ -54,6 +59,11 @@ const SearchPage = () => {
   return(
     <>
     <div className={cx(desktopView)}>
+      {
+        setting ?
+        <MetaComp appName={setting.app_name} title={`Produk ${querySlug.get("q")}`} desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
+        : null
+      }
       <Navbar keyword={querySlug.get("q")} />
       {
         imgProductLoad ?

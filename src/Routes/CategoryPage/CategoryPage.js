@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Alert } from 'antd';
 import { cx } from '@emotion/css';
+import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
@@ -24,20 +25,28 @@ const CategoryPage = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState({});
   const [imgProductLoad, setImgProductLoad] = useState(false);
+  const [setting, setSetting] = useState();
 
   const urlSlug = useParams();
 
   useEffect(() => {
     API.getProductsByCategory(urlSlug.slug)
     .then((result) => {
-      setCategory(result.data.category);
-      document.title = `Kategori ${result.data.category.name}`;
-      if(result.data.products.length > 0){
-        setProducts(result.data.products);
+      if(result.data.success){
+        setCategory(result.data.category);
+        if(result.data.products.length > 0){
+          setProducts(result.data.products);
+        }else{
+          setProducts(false);
+          handleImgProductLoad(true);
+        }
       }else{
-        setProducts(false);
-        handleImgProductLoad(true);
+        window.location.href = "/";
       }
+    })
+    API.getSetting()
+    .then((result) => {
+      setSetting(result.data.setting);
     })
     window.scrollTo(0,0);
   }, [urlSlug])
@@ -49,6 +58,11 @@ const CategoryPage = () => {
   return (
     <>
     <div className={cx(desktopView)}>
+      {
+        setting ?
+        <MetaComp appName={setting.app_name} title={`Kategori ${category.name}`} desc={setting.short_desc} img={`categories/${category.icon}`} favicon={setting.favicon} />
+        : null
+      }
       <Navbar />
       <SingleBanner title={category.name} filterImg heightSingleBanner={String.heightImgSingleBanner} srcImg={category.icon ? `${Config.backendURL}public/img/categories/${category.icon}` : '#'} />
       {

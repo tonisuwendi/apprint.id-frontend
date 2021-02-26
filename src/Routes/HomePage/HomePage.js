@@ -1,16 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cx } from '@emotion/css';
-
 import { Button, Skeleton, Alert } from 'antd';
-
+import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import Banner from '../../components/Banner/Banner';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
 import Tabbar from '../../components/Tabbar/Tabbar';
-import Category from '../../components/Category/Category';
 import String from '../../config/String';
 import API from '../../service';
 
@@ -22,25 +20,20 @@ import {
   dGrid,
   sizeElmMobile,
   fontSizeMobile,
-  centerElm,
-  padding
+  centerElm
 } from './styles';
 
 const HomePage = () => {
 
-  const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [imgProductLoad, setImgProductLoad] = useState(false);
+  const [setting, setSetting] = useState();
   
   useEffect(() => {
     API.getSetting()
     .then((result) => {
-      document.title = result.data.setting.app_name;
+      setSetting(result.data.setting);
     })
-    API.getCategories()
-    .then((result) => {
-      setCategories(result.data.categories);
-    });
     API.getProductsHome()
     .then((result) => {
       if(result.data.products.length > 0){
@@ -59,6 +52,11 @@ const HomePage = () => {
   return (
     <>
     <div className={cx(desktopView)}>
+      {
+        setting ?
+        <MetaComp appName={setting.app_name} title={setting.app_name} desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
+        : null
+      }
       <Navbar />
       <Banner />
       {
@@ -103,7 +101,7 @@ const HomePage = () => {
       }
       <h2 className={cx(margin("35px 0 0 0"), fontSizeMobile("14px"), textAlign("center"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
       <div className={cx(margin("10px 0 25px 0"))}>
-        <Banner width="450px" rouded="10px" footer />
+        <Banner width="500px" rouded="10px" footer />
       </div>
       <div className={cx(margin("0"))}>
         <DescStore />

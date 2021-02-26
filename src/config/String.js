@@ -1,4 +1,5 @@
 const String = {
+  "thisURL": `https://${window.location.hostname}`,
   "searchTitle": "Mau print apa?",
   "searchPlaceholder": "Mau print apa hari ini?",
   "btnSearch": "Cari Sekarang",

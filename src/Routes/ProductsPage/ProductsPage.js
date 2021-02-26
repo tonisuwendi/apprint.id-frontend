@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { cx } from '@emotion/css';
 import { Skeleton, Alert } from 'antd';
+import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
@@ -25,9 +26,9 @@ const ProductsPage = () => {
 
   const [products, setProducts] = useState([]);
   const [imgProductLoad, setImgProductLoad] = useState(false);
+  const [setting, setSetting] = useState();
 
   useEffect(() => {
-    document.title = 'Semua Produk';
     API.getProducts()
     .then((result) => {
       if(result.data.products.length > 0){
@@ -36,6 +37,10 @@ const ProductsPage = () => {
         setProducts(false);
         handleImgProductLoad(true);
       }
+    })
+    API.getSetting()
+    .then((result) => {
+      setSetting(result.data.setting);
     })
     window.scrollTo(0,0);
   }, [])
@@ -47,6 +52,11 @@ const ProductsPage = () => {
   return (
     <>
     <div className={cx(desktopView)}>
+      {
+        setting ?
+        <MetaComp appName={setting.app_name} title="Semua Produk" desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
+        : null
+      }
       <Navbar />
       {
         imgProductLoad ?

@@ -3,6 +3,7 @@ import { cx } from '@emotion/css';
 import { Form, Card, InputNumber, Button, Skeleton, Alert } from 'antd';
 import { useParams } from 'react-router';
 import nl2br from 'react-nl2br';
+import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import SingleBanner from '../../components/SingleBanner/SingleBanner';
 import SelectOption from '../../components/SelectOption/SelectOption';
@@ -27,6 +28,7 @@ const DetailProduct = () => {
   const [specification, setSpecification] = useState([]);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [alertDanger, setAlertDanger] = useState(false);
+  const [setting, setSetting] = useState();
   const [dataOrder, setDataOrder] = useState({
     spec: [{}],
     qty: 0
@@ -38,7 +40,6 @@ const DetailProduct = () => {
     API.getProductBySlug(urlSlug.slug)
     .then((result) => {
       if(result.data.success === true){
-        document.title = result.data.product.title;
         setProduct(result.data.product);
         setSpecification(result.data.spec);
         setDataLoad(true);
@@ -49,6 +50,10 @@ const DetailProduct = () => {
       }else{
         window.location.href = "/";
       }
+    })
+    API.getSetting()
+    .then((result) => {
+      setSetting(result.data.setting);
     })
     window.scrollTo(0,0);
   }, [urlSlug]);
@@ -115,6 +120,11 @@ const DetailProduct = () => {
   return(
     <>
       <div className={cx(desktopView)}>
+        {
+          setting ?
+          <MetaComp appName={setting.app_name} title={product.title} desc={product.description} img={`products/${product.img}`} favicon={setting.favicon} />
+          : null
+        }
         <Navbar />
         <SingleBanner heightSingleBanner="250px" srcImg={product.img ? `${Config.backendURL}public/img/products/${product.img}` : '#'} />
         <div className={cx(margin("15px"))}>
