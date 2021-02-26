@@ -18,11 +18,16 @@ import {
 } from './styles';
 
 const Category = (props) => {
+
+  const handleClickCategory = () => {
+    props.categoryClick(false);
+  }
+
   return (
     <>
     {
       props.load ?
-      <Link className={cx(props.modal ? cardModal : card, rounded("5px"))} to={`/category/${props.data.slug}`}>
+      <Link onClick={() => handleClickCategory()} className={cx(props.modal ? cardModal : card, rounded("5px"))} to={`/category/${props.data.slug}`}>
         <div className={cx(dFlex("row", "center"))}>
           <img className={cx(sizeElm("40px", "40px"), props.modal ? null : sizeElmMobile("35px", "35px"), rounded("5px"))} src={`${Config.backendURL}public/img/categories/${props.data.icon}`} alt="icon category" />
           <p className={cx(margin("0 0 0 10px"), color("#333"), props.modal ? fontSizeMobile("14px") : fontSizeMobile("12px"), fontElm("Nunito", "15px", "600"))}>{props.data.name}</p>

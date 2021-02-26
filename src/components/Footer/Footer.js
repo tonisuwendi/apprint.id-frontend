@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { cx } from '@emotion/css';
-import { PhoneFilled, MailFilled, ClockCircleFilled, InstagramFilled, FacebookFilled, LinkedinFilled } from '@ant-design/icons';
+import { PhoneFilled, MailFilled, ClockCircleFilled, InstagramFilled, FacebookFilled, LinkedinFilled, TwitterSquareFilled, YoutubeFilled, IeSquareFilled } from '@ant-design/icons';
 import String from '../../config/String';
 import { Skeleton } from 'antd';
 import ListComponent from './ListComponent';
@@ -48,9 +48,36 @@ const Footer = () => {
             <ListComponent icon={<ClockCircleFilled />} text={setting.open_store} />
           </div>
           <div className={cx(margin("30px 0 15px 0"), textColor("#ccc"), fontElm("", "20px", ""), dFlex("row", "center"))}>
-            <InstagramFilled onClick={() => handleGotoWebsite(`https://instagram.com/${String.accountInstagram}`)} className={cx(margin("0 5px"))} />
-            <FacebookFilled onClick={() => handleGotoWebsite(`https://facebook.com/${String.accountFacebook}`)} className={cx(margin("0 5px"))} />
-            <LinkedinFilled onClick={() => handleGotoWebsite(`https://linkedin.com/in/${String.accountLinkedIn}`)} className={cx(margin("0 5px"))} />
+            {
+              setting.facebook !== "" ?
+              <FacebookFilled onClick={() => handleGotoWebsite(`https://facebook.com/${setting.facebook}`)} className={cx(margin("0 5px"))} />
+              : null
+            }
+            {
+              setting.instagram !== "" ?
+              <InstagramFilled onClick={() => handleGotoWebsite(`https://instagram.com/${setting.instagram}`)} className={cx(margin("0 5px"))} />
+              : null
+            }
+            {
+              setting.twitter !== "" ?
+              <TwitterSquareFilled onClick={() => handleGotoWebsite(`https://twitter.com/${setting.twitter}`)} className={cx(margin("0 5px"))} />
+              : null
+            }
+            {
+              setting.linkedin !== "" ?
+              <LinkedinFilled onClick={() => handleGotoWebsite(`https://linkedin.com/in/${setting.linkedin}`)} className={cx(margin("0 5px"))} />
+              : null
+            }
+            {
+              setting.tiktok !== "" ?
+              <IeSquareFilled onClick={() => handleGotoWebsite(`https://tiktok.com/@${setting.tiktok}`)} className={cx(margin("0 5px"))} />
+              : null
+            }
+            {
+              setting.youtube !== "" ?
+              <YoutubeFilled onClick={() => handleGotoWebsite(`https://youtube.com/${setting.youtube}`)} className={cx(margin("0 5px"))} />
+              : null
+            }
           </div>
           <p className={cx(textColor("#ccc"), fontElm("Nunito", "14", "600"), dFlex("row", "center"))}>{setting.copyright}</p>
         </Fragment>

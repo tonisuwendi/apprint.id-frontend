@@ -22,7 +22,8 @@ import {
   dGrid,
   sizeElmMobile,
   fontSizeMobile,
-  centerElm
+  centerElm,
+  padding
 } from './styles';
 
 const HomePage = () => {
@@ -60,29 +61,6 @@ const HomePage = () => {
     <div className={cx(desktopView)}>
       <Navbar />
       <Banner />
-      {/* {
-        categories.length > 0 ?
-        <Fragment>
-          <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.categoryTitleHome}</h2>
-          <section className={cx(dGrid, margin("10px 0 0 0"), sizeElmMobile("93%", "auto"))}>
-            {
-              categories.map((category, i) => {
-                return <Category load key={i} data={category} />
-              })
-            }
-          </section>
-        </Fragment>
-        :
-        <div className={cx(margin("30px 0 0 0"))}>
-          <Skeleton.Input active size="small" style={{ width: 150 }} className={cx(centerElm)} />
-          <section className={cx(dGrid, margin("10px 0 0 0"), sizeElmMobile("93%", "auto"))}>
-            <Category />
-            <Category />
-            <Category />
-            <Category />
-          </section>
-        </div>
-      } */}
       {
         imgProductLoad ?
         null :
@@ -103,7 +81,7 @@ const HomePage = () => {
         products ?
         <Fragment>
           <div style={imgProductLoad ? {} : {display: 'none'}}>
-            <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitleHome}</h2>
+            <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productFavorite}</h2>
             <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
               {
                 products.map((product, i) => {
@@ -123,7 +101,11 @@ const HomePage = () => {
           } />
         </div>
       }
-      <div className={cx(margin("30px 0 0 0"))}>
+      <h2 className={cx(margin("35px 0 0 0"), fontSizeMobile("14px"), textAlign("center"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
+      <div className={cx(margin("10px 0 25px 0"))}>
+        <Banner width="450px" rouded="10px" footer />
+      </div>
+      <div className={cx(margin("0"))}>
         <DescStore />
       </div>
       <Footer />

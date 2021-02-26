@@ -9,6 +9,7 @@ const searchProduct = (keyword) => Get(`products/search?q=${keyword}`);
 const getOptionBySpec = (idSpec) => Get(`products/option/${idSpec}`);
 const getSetting = () => Get('settings');
 const getBanner = () => Get('settings/banner');
+const getBannerHowToOrder = () => Get('settings/banner-hto');
 
 const API = {
   getCategories,
@@ -19,7 +20,8 @@ const API = {
   searchProduct,
   getOptionBySpec,
   getSetting,
-  getBanner
+  getBanner,
+  getBannerHowToOrder
 }
 
 export default API;

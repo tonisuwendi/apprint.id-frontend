@@ -60,8 +60,7 @@ const DetailProduct = () => {
       .then((result) => {
         const setting = result.data.setting;
         const msg = generateTextWa(setting.order_wa);
-        window.open(`https://wa.me/${setting.whatsapp}?text=${msg}`);
-        window.location.href = "/";
+        window.location.href = `https://wa.me/${setting.whatsapp}?text=${msg}`;
       })
     }else{
       setAlertDanger(true);
@@ -148,7 +147,11 @@ const DetailProduct = () => {
                     <InputNumber onChange={handleChangeQty} style={{width: "100%"}} min={0} />
                   </Form.Item>
                 </Form>
-                <Button className={cx(margin("0 0 15px 0"), buttonOrder)} size="large" block loading={buttonLoading} onClick={() => enterLoading()}>
+                <Card size="small">
+                  <h3 className={cx(textColor("red"), margin("0"), fontElm("Nunito", "16px", "700"))}>Catatan</h3>
+                  <p className={cx(margin("0"))}>Silahkan hubungi kami dengan spesifikasi yang anda masukan. Terima Kasih</p>
+                </Card>
+                <Button className={cx(margin("20px 0 15px 0"), buttonOrder)} size="large" block loading={buttonLoading} onClick={() => enterLoading()}>
                   {String.buttonOrder}
                 </Button>
               </Card>
@@ -163,6 +166,7 @@ const DetailProduct = () => {
                   <Skeleton.Input active size="default" style={{width: "300px"}} /><br/>
                   <Skeleton.Input  className={cx(margin("8px 0 4px 0"))} active size="small" style={{width: "130px"}} /><br/>
                   <Skeleton.Input className={cx(margin("0 0 9px 0"))} active size="default" style={{width: "300px"}} />
+                  <Skeleton paragraph={{rows: 1}} active />
                   <SingleBanner heightSingleBanner="30px" srcImg="#" />
                 </Form>
               </Card>

@@ -82,7 +82,7 @@ const Tabbar = (props) => {
       >
         {
           categories.map((category, i) => {
-            return <Category load key={i} modal data={category} />
+            return <Category categoryClick={(value) => setModalCategories(value)} load key={i} modal data={category} />
           })
         }
       </Modal>

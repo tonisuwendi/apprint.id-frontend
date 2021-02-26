@@ -64,7 +64,7 @@ const ProductsPage = () => {
       {
         products ?
         <div style={imgProductLoad ? {} : {display: 'none'}}>
-          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitleHome}</h2>
+          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitle}</h2>
           <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
             {
               products.map((product, i) => {

@@ -29,6 +29,11 @@ export const margin = (value) => css`
   margin: ${value}
 `;
 
+export const padding = (value) => css`
+  box-sizing: border-box;
+  padding: ${value}
+`;
+
 export const textAlign = (value) => css`
   text-align: ${value};
 `;
