@@ -33,7 +33,8 @@ const Banner = (props) => {
     className: 'slider variable-width',
     draggable: true,
     infinite: true,
-    variableWidth: true
+    variableWidth: true,
+    adaptiveHeight: true
   }
 
   if(props.footer){

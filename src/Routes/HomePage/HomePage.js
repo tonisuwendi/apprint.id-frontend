@@ -99,9 +99,17 @@ const HomePage = () => {
           } />
         </div>
       }
-      <h2 className={cx(margin("35px 0 0 0"), fontSizeMobile("14px"), textAlign("center"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
-      <div className={cx(margin("10px 0 25px 0"))}>
-        <Banner width="500px" rouded="10px" footer />
+      <div className={cx(margin("30px 0 0 0"))}>
+        {
+          setting ?
+          setting.status_banner_hto ?
+          <Fragment>
+            <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("14px"), textAlign("center"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
+            <div className={cx(margin("10px 0 25px 0"))}>
+              <Banner width="500px" rouded="10px" footer />
+            </div>
+          </Fragment> : null : null
+        }
       </div>
       <div className={cx(margin("0"))}>
         <DescStore />
