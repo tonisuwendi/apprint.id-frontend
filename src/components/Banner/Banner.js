@@ -41,6 +41,10 @@ const Banner = (props) => {
     settingCarousel.dots = false;
   }
 
+  const redirectUrl = (url) => {
+    window.location.href = url;
+  }
+
   return (
     <>
     <div className={cx(centerElm, sizeElm(props.width ? props.width : "500px", "auto", props.footer ? "93vw" : '100vw', "auto"))}>
@@ -61,7 +65,7 @@ const Banner = (props) => {
           }) :
           banner.map((b, i) => {
             return (
-              <div key={i}>
+              <div onClick={ b.url ? () => redirectUrl(b.url) : null }  key={i}>
                 <img style={bannerLoad ? {} : {display: 'none'}} onLoad={() => setBannerLoad(true)} className={cx(sizeElm(props.width ? props.width : "500px", "auto", '100vw'), props.rouded ? rouded(props.rouded) : null)} src={`${Config.backendURL}public/img/banner/${b.img}`} alt="banner" />
               </div>
             )
