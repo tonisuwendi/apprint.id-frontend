@@ -126,7 +126,7 @@ const DetailProduct = () => {
           : null
         }
         <Navbar />
-        <SingleBanner heightSingleBanner="250px" srcImg={product.img ? `${Config.backendURL}public/img/products/${product.img}` : '#'} />
+        <SingleBanner heightSingleBanner="auto" detailProduct srcImg={product.img ? `${Config.backendURL}public/img/products/${product.img}` : '#'} />
         <div className={cx(margin("15px"))}>
           {
             dataLoad ?

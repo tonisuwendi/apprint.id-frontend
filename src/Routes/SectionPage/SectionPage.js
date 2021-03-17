@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
 import { cx } from '@emotion/css';
 import { Skeleton, Alert } from 'antd';
+import { useParams } from 'react-router';
 import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import CardProduct from '../../components/CardProduct/CardProduct';
@@ -10,7 +10,6 @@ import Footer from '../../components/Footer/Footer';
 import Tabbar from '../../components/Tabbar/Tabbar';
 
 import API from '../../service';
-import String from '../../config/String';
 
 import {
   desktopView,
@@ -21,28 +20,33 @@ import {
   dGrid,
   sizeElmMobile,
   centerElm
-} from '../ProductsPage/styles';
+} from './../ProductsPage/styles';
 
-const SearchPage = () => {
+const SectionPage = () => {
 
+  const [section, setSection] = useState({});
   const [products, setProducts] = useState([]);
   const [imgProductLoad, setImgProductLoad] = useState(false);
   const [setting, setSetting] = useState();
 
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  }
-
-  const querySlug = useQuery();
+  const urlSlug = useParams();
 
   useEffect(() => {
-    API.searchProduct(querySlug.get("q"))
-    .then((result) => {
-      if(result.data.products.length > 0){
-        setProducts(result.data.products);
+    API.getSectionBySlug(urlSlug.slug)
+    .then(result => {
+      if(result.data.section){
+        setSection(result.data.section);
+        API.getProductSection(result.data.section.id)
+        .then((result) => {
+          if(result.data.products.length > 0){
+            setProducts(result.data.products);
+          }else{
+            setProducts(false);
+            handleImgProductLoad(true);
+          }
+        })
       }else{
-        setProducts(false);
-        handleImgProductLoad(true);
+        window.location.href = "/";
       }
     })
     API.getSetting()
@@ -50,21 +54,21 @@ const SearchPage = () => {
       setSetting(result.data.setting);
     })
     window.scrollTo(0,0);
-  }, [querySlug])
+  }, [urlSlug.slug])
 
   const handleImgProductLoad = (value) => {
     setImgProductLoad(value);
   }
 
-  return(
+  return (
     <>
     <div className={cx(desktopView)}>
       {
         setting ?
-        <MetaComp appName={setting.app_name} title={`Produk ${querySlug.get("q")}`} desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
+        <MetaComp appName={setting.app_name} title={section.title} desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
         : null
       }
-      <Navbar keyword={querySlug.get("q")} />
+      <Navbar />
       {
         imgProductLoad ?
         null :
@@ -81,7 +85,7 @@ const SearchPage = () => {
       {
         products ?
         <div style={imgProductLoad ? {} : {display: 'none'}}>
-          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "18px", "500"))}>{`${String.resultSearch} ${querySlug.get('q')}`}</h2>
+          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{section.title}</h2>
           <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
             {
               products.map((product, i) => {
@@ -92,7 +96,7 @@ const SearchPage = () => {
         </div> :
         <div className={cx(margin("20px 0 0 0"))}>
           <Alert banner message={
-              <div>Tidak ada hasil untuk {querySlug.get('q')}</div>
+              <div>Tidak ada produk yang dapat ditampilkan</div>
           } />
         </div>
       }
@@ -106,4 +110,4 @@ const SearchPage = () => {
   )
 }
 
-export default SearchPage;
+export default SectionPage;

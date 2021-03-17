@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cx } from '@emotion/css';
-import { Button, Skeleton, Alert } from 'antd';
+import { Skeleton, Alert } from 'antd';
 import MetaComp from '../../components/MetaComp/MetaComp';
 import Navbar from '../../components/Navbar/Navbar';
 import Banner from '../../components/Banner/Banner';
+import SectionProduct from '../../components/SectionProduct/SectionProduct';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import DescStore from '../../components/DescStore/DescStore';
 import Footer from '../../components/Footer/Footer';
@@ -16,16 +17,18 @@ import {
   desktopView,
   fontElm,
   margin,
-  textAlign,
   dGrid,
   sizeElmMobile,
   fontSizeMobile,
-  centerElm
+  centerElm,
+  marginMobile,
+  button
 } from './styles';
 
 const HomePage = () => {
 
   const [products, setProducts] = useState([]);
+  const [sections, setSections] = useState([]);
   const [imgProductLoad, setImgProductLoad] = useState(false);
   const [setting, setSetting] = useState();
   
@@ -41,6 +44,12 @@ const HomePage = () => {
       }else{
         setProducts(false);
         handleImgProductLoad(true);
+      }
+    })
+    API.getSections()
+    .then(result => {
+      if(result.data.sections.length > 0) {
+        setSections(result.data.sections);
       }
     })
     window.scrollTo(0,0);
@@ -60,27 +69,41 @@ const HomePage = () => {
       <Navbar />
       <Banner />
       {
+        sections.length > 0 ?
+        sections.map((section, i) => {
+          return <Fragment key={i}>
+            <div>
+              <h2 className={cx(margin("30px 0 10px 0"), marginMobile("40px 15px 0px 15px"), fontSizeMobile("18px"), fontElm("Nunito", "20px", "700"))}>{section.title}</h2>
+              <SectionProduct id={section.id} />
+            </div>
+            <Link style={imgProductLoad ? {} : {display: 'none'}} to={`/section/${section.slug}`}>
+              <button className={cx(centerElm, button(), fontElm("Nunito", "15px", "700"))}>{String.buttonShowAllProduct}</button>
+            </Link>
+          </Fragment>
+        }) : null
+      }
+      {
         imgProductLoad ?
         null :
         <Fragment>
-          <div className={cx(margin("30px 0 0 0"))}>
-            <Skeleton.Input active size="small" style={{ width: 150 }} className={cx(centerElm)} />
-            <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
+          <div className={cx(margin("0"))}>
+            <Skeleton.Input active size="small" style={{ width: 150 }} className={cx(marginMobile("20px 10px 0 10px"))} />
+            <section className={cx(dGrid, margin("5px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
             <CardProduct />
             <CardProduct />
             <CardProduct />
             <CardProduct />
             </section>
           </div>
-          <Skeleton.Input active size="default" style={{ width: 150 }} className={cx(centerElm)} />
+          <Skeleton.Input active size="default" className={cx(marginMobile("0 10px"))} style={{ width: 150 }} />
         </Fragment>
       }
       {
         products ?
         <Fragment>
           <div style={imgProductLoad ? {} : {display: 'none'}}>
-            <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productFavorite}</h2>
-            <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
+            <h2 className={cx(margin("40px 0 10px 0"), marginMobile("30px 15px 0 15px"), fontSizeMobile("18px"), fontElm("Nunito", "20px", "700"))}>{setting ? setting.title_favorite : ""}</h2>
+            <section className={cx(dGrid, margin("5px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
               {
                 products.map((product, i) => {
                   return <CardProduct setImgProductLoad={(value) => handleImgProductLoad(value)} load key={i} data={product} />
@@ -89,7 +112,7 @@ const HomePage = () => {
             </section>
           </div>
           <Link style={imgProductLoad ? {} : {display: 'none'}} to="/products">
-            <Button size="large" className={cx(centerElm)}>{String.buttonShowAllProduct}</Button>
+          <button className={cx(centerElm, button(), fontElm("Nunito", "15px", "700"))}>{String.buttonShowAllProduct}</button>
           </Link>
         </Fragment>
          :
@@ -104,7 +127,7 @@ const HomePage = () => {
           setting ?
           setting.status_banner_hto ?
           <Fragment>
-            <h2 className={cx(margin("30px 0 0 0"), fontSizeMobile("14px"), textAlign("center"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
+            <h2 className={cx(margin("30px 0 0 0"), marginMobile("30px 15px 0 15px"), fontSizeMobile("14px"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
             <div className={cx(margin("10px 0 25px 0"))}>
               <Banner width="500px" rouded="10px" footer />
             </div>

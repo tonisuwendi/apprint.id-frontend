@@ -13,6 +13,22 @@ export const desktopView = css`
   }
 `;
 
+export const button = (full = true) => css`
+  background-color: white;
+  border: 2px solid dodgerblue;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px 0;
+  transition: 0.2s;
+  width: ${full ? "100%" : full};
+  @media (max-width: 500px) {
+    width: ${full ? "93%" : full};
+  }
+  :hover {
+    background-color: #f5f5f5;
+  }
+`;
+
 export const dFlex = (direction, jc) => css`
   display: flex;
   flex-direction: ${direction};
@@ -57,6 +73,12 @@ export const sizeElmMobile = (width, height) => css`
     position: relative;
     transform: translate(-50%, 0);
     width: ${width};
+  }
+`;
+
+export const marginMobile = (value) => css`
+  @media (max-width: 500px){
+    margin: ${value};
   }
 `;
 

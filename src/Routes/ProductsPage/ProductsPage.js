@@ -54,7 +54,7 @@ const ProductsPage = () => {
     <div className={cx(desktopView)}>
       {
         setting ?
-        <MetaComp appName={setting.app_name} title="Semua Produk" desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
+        <MetaComp appName={setting.app_name} title={setting.title_all_product} desc={setting.short_desc} img={`logo/${setting.favicon}`} favicon={setting.favicon} />
         : null
       }
       <Navbar />
@@ -74,7 +74,7 @@ const ProductsPage = () => {
       {
         products ?
         <div style={imgProductLoad ? {} : {display: 'none'}}>
-          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("16px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{String.productTitle}</h2>
+          <h2 className={cx(margin("20px 0 0 0"), fontSizeMobile("18px"), textAlign("center"), fontElm("Nunito", "20px", "700"))}>{setting ? setting.title_all_product: ""}</h2>
           <section className={cx(dGrid, margin("15px 0 20px 0"), sizeElmMobile("93%", "auto"))}>
             {
               products.map((product, i) => {

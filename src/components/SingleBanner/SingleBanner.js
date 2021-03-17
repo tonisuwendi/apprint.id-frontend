@@ -23,11 +23,14 @@ const SingleBanner = (props) => {
         imgLoad ?
         null
         :
-        <div className={cx(singleBanner(props.heightSingleBanner), bgColor("#ddd"))}></div>
+        <div className={cx(singleBanner(props.detailProduct ? "300px" : props.heightSingleBanner), bgColor("#ddd"))}></div>
       }
       <div style={imgLoad ? {} : {display: 'none'}} className={cx(singleBanner(props.heightSingleBanner))}>
-        <img onLoad={() => setImgLoad(true)} className={cx(imgSize(props.heightSingleBanner), position("absolute"), props.filterImg ? filter("brightness", "0.4") : null)} src={props.srcImg} alt="banner" />
-        <h2 className={cx(fontElm("Nunito", "22px", "800"), textAlign("center"), position("absolute"), color("white"), centerElm)}>{props.title}</h2>
+        <img onLoad={() => setImgLoad(true)} className={cx(imgSize(props.heightSingleBanner), props.detailProduct ? position("relative") : position("absolute"), props.filterImg ? filter("brightness", "0.4") : null)} src={props.srcImg} alt="banner" />
+        {
+          props.detailProduct ? null : 
+          <h2 className={cx(fontElm("Nunito", "22px", "800"), textAlign("center"), position("absolute"), color("white"), centerElm)}>{props.title}</h2>
+        }
       </div>
     </>
   )
