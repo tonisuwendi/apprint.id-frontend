@@ -8,7 +8,7 @@ const String = {
   "productFavorite": "Produk Cetak Pilihan",
   "productAll": "Semua Produk",
   "buttonShowAllProduct": "Lihat Semua Produk",
-  "titleStep": "Langkah Cepat & Mudah Mencetak Online",
+  "titleStep": "Langkah Mudah Mencetak Online",
   "resultSearch": "Hasil pencarian ",
   "titleContact": "Hubungi Kami",
   "accountInstagram": "tonisuwen",

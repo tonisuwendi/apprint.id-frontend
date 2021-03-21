@@ -127,7 +127,7 @@ const HomePage = () => {
           setting ?
           setting.status_banner_hto ?
           <Fragment>
-            <h2 className={cx(margin("30px 0 0 0"), marginMobile("30px 15px 0 15px"), fontSizeMobile("14px"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
+            <h2 className={cx(margin("30px 0 0 0"), marginMobile("30px 15px 0 15px"), fontSizeMobile("18px"), fontElm("Nunito", "16px", "700"))}>{String.titleStep}</h2>
             <div className={cx(margin("10px 0 25px 0"))}>
               <Banner width="500px" rouded="10px" footer />
             </div>
